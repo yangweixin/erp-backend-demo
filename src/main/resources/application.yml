@@ -1,0 +1,57 @@
+﻿server:
+  port: 8080
+#  servlet:
+#    context-path: /boot
+  tomcat:
+    uri-encoding: utf-8
+
+logging:
+  path: logs/
+  level.root: info
+
+spring:
+  datasource:
+    name: young-001
+    url: jdbc:mysql://39.108.184.27:3306/young
+    username: young
+    password: Guest@Mysql@001
+
+#################redis基础配置#################
+  redis:
+    host: 39.108.184.27
+    port: 6379
+    password: Guest@Redis@001
+    database: 0
+    timeout: 3000
+    #################redis线程池设置#################
+    jedis:
+      pool:
+        max-idle: 10
+        min-idle: 1
+        max-active: 10
+        max-wait: 1000
+
+
+mybatis:
+  mapper-locations: classpath:top/oyoung/springbootdemo/mapper/*.xml
+
+top.oyoung:
+  enable: true
+  name: young
+  age: 11
+  address[0]: 北京
+  address[1]: 上海
+  address[2]: 广州
+  phone.number: 1111111
+
+properties.string:
+  enable: true
+  prefix: start
+  subfix:  end
+
+management.endpoints.web.exposure.include: info, health,env
+
+
+
+
+
