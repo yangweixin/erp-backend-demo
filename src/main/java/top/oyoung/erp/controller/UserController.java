@@ -1,6 +1,7 @@
 package top.oyoung.erp.controller;
 
 import io.swagger.annotations.Api;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
@@ -11,12 +12,12 @@ import top.oyoung.erp.entity.User;
 import top.oyoung.erp.entity.in.UserParam;
 import top.oyoung.erp.entity.out.UserResult;
 import top.oyoung.erp.exception.LocalException;
+import top.oyoung.erp.exception.UserException;
 import top.oyoung.erp.service.UserService;
 import top.oyoung.erp.util.JwtUtil;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -42,10 +43,10 @@ public class UserController {
     ){
         User user = userService.getUserByName( userParam.getUsername() );
         if(user == null){
-            throw new LocalException(ErrorCode.USER_LOGIN, "用户不存在");
+            throw new UserException.UserNotFoundException();
         }
         if( !userParam.getPassword().equals( user.getPassword() ) ){
-            throw new LocalException(ErrorCode.USER_LOGIN, "密码错误");
+            throw new UserException.PasswordErrorException();
         }
 
         String token = jwtUtil.generateToken( user );
