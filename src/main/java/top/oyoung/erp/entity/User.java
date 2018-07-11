@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @Method: top.oyoung.springmvc.entity
- * @Desc:
+ * @Desc: 应用内流通的User实体
  * @Author: Yang Weixin
  * @Date: 2018/3/26 10:11
  */
@@ -18,7 +18,6 @@ import java.util.List;
 public class User implements Serializable,UserDetails {
 
     private int id ;
-    private String account;
     private String username;
     private String password;
     private String address;
@@ -32,31 +31,12 @@ public class User implements Serializable,UserDetails {
         this.id = id;
     }
 
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-            "id=" + id +
-            ", account='" + account + '\'' +
-            ", username='" + username + '\'' +
-            ", address='" + address + '\'' +
-            ", password='" + password + '\'' +
-            '}';
     }
 
     @Override
@@ -104,5 +84,16 @@ public class User implements Serializable,UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+            "id=" + id +
+            ", username='" + username + '\'' +
+            ", address='" + address + '\'' +
+            ", password='" + password + '\'' +
+            '}';
     }
 }

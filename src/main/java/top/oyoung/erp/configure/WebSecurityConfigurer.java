@@ -1,12 +1,16 @@
 package top.oyoung.erp.configure;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import top.oyoung.erp.filter.JwtAuthenticationFilter;
 import top.oyoung.erp.filter.LoginAuthenticationEntryPoint;
 import top.oyoung.erp.filter.LoginAuthenticationProvider;
 import top.oyoung.erp.filter.RestAccessDeniedHandler;
@@ -29,18 +33,26 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     private LoginAuthenticationEntryPoint authenticationEntryPoint;
     @Resource
     private RestAccessDeniedHandler accessDeniedHandler;
+    @Resource
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        http.addFilterBefore( jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class );
+
         http
             .csrf().disable()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .accessDeniedHandler(accessDeniedHandler)
                 .and()
             .authorizeRequests()
-                .anyRequest().authenticated();
+                .antMatchers(HttpMethod.POST,"/user/login").permitAll()
+                .antMatchers(HttpMethod.POST,"/user/registe").permitAll()
+                .anyRequest().authenticated().and()
+            .headers().cacheControl();
     }
 
     @Override

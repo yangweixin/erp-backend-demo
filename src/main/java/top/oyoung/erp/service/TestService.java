@@ -12,25 +12,25 @@ import top.oyoung.erp.entity.User;
 @Service
 public class TestService {
 
-    @Autowired
-    private UserDao userDao;
-
-    @Cacheable(value = "user", key = "'user-'+#id")
-    public User getUserById(int id){
-        System.out.println("getUserById");
-        return userDao.getUserById(id);
-    }
-
-    @CachePut(value = "user", key = "'user-'+#id")
-    public User updateUserById(int id,String account){
-        System.out.println("updateUserById");
-        userDao.updateUserById(account,id );
-        return userDao.getUserById(id);
-    }
-
-    @CacheEvict(value = "user", allEntries = true)
-    @Scheduled(fixedDelay = 10000)
-    public void deleteCache(){
-
-    }
+//    @Autowired
+//    private UserDao userDao;
+//
+//    @Cacheable(value = "user", key = "'user-'+#id")
+//    public User getUserById(int id){
+//        System.out.println("getUserById");
+//        return userDao.getById(id);
+//    }
+//
+//    @CachePut(value = "user", key = "'user-'+#id")
+//    public User updateUserById(int id,String account){
+//        System.out.println("updateUserById");
+//        userDao.updateById(account,id );
+//        return userDao.getById(id);
+//    }
+//
+//    @CacheEvict(value = "user", allEntries = true)
+//    @Scheduled(fixedDelay = 10000)
+//    public void deleteCache(){
+//
+//    }
 }

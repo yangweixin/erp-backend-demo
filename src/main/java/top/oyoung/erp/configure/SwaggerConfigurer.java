@@ -6,6 +6,7 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
@@ -24,9 +25,10 @@ public class SwaggerConfigurer{
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("api文档")
-            .description("restful 风格接口")
+            .title("[erp-backend]")
+            .description("restful api 接口文档")
             .version("1.0")
+            .contact(new Contact("young","http://oyoung.top","yangweixin@2015@163.com"))
             .build();
     }
 

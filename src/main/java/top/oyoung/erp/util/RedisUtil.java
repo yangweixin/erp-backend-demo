@@ -1,9 +1,8 @@
-package top.oyoung.erp.tool;
+package top.oyoung.erp.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
-import top.oyoung.erp.dao.UserDao;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,9 +11,12 @@ public class RedisUtil {
 
     @Autowired
     private ValueOperations<String, Object> valueOperations;
-    @Autowired
-    private UserDao userDao;
 
+    /**
+     * @Author: Yang Weixin
+     * @Description: 默认设置值，过期时间为60分钟
+     * @DateTime: 2018/7/11 上午11:47
+     */
     public void setValue(String key, Object value){
         setValue(key, value,60*1000);
     }
@@ -30,25 +32,5 @@ public class RedisUtil {
 
         return null;
     }
-//
-//    public User getUserSafe(int id){
-//        Object value = valueOperations.get("user"+id);
-//        if(value == null){
-//
-//            if(valueOperations.setIfAbsent("user-mutex",1 )){
-//                User user = userDao.getUserById(id);
-//                setValue("user"+id, user);
-//            }else{
-//                try {
-//                    Thread.sleep(50);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                getUserSafe(id);
-//            }
-//        } else{
-//            return (User)value;
-//        }
-//    }
 
 }

@@ -5,17 +5,15 @@ package top.oyoung.erp.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.hibernate.validator.constraints.Range;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import top.oyoung.erp.annotation.MyGate;
+import top.oyoung.erp.annotation.RegexpValidate;
 import top.oyoung.erp.dao.UserDao;
-import top.oyoung.erp.entity.Person;
 import top.oyoung.erp.entity.User;
 import top.oyoung.erp.service.TestService;
-import top.oyoung.erp.tool.RedisUtil;
+import top.oyoung.erp.util.RedisUtil;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -34,10 +32,6 @@ public class TestController {
 
     @Resource
     private TestService testService;
-    @Resource
-    private Person person;
-//    @Resource
-//    private ConcatStrService concatStrService;
     @Resource
     private RedisUtil redisUtil;
     @Resource
@@ -83,14 +77,14 @@ public class TestController {
 
 
 
-    @ApiOperation("获取用户信息")
-    @PreAuthorize("hasRole('NOMAL')")
-//    @PostAuthorize("returnObject.account == 'y'")
-    @GetMapping("/{id}")
-    @ResponseBody
-    public User t3(@PathVariable("id")int id){
-        return testService.getUserById(id);
-    }
+//    @ApiOperation("获取用户信息")
+//    @PreAuthorize("hasRole('NOMAL')")
+////    @PostAuthorize("returnObject.account == 'y'")
+//    @GetMapping("/{id}")
+//    @ResponseBody
+//    public User t3(@PathVariable("id")int id){
+//        return testService.getById(id);
+//    }
 
 
     @GetMapping("/{key}/{value}")
@@ -104,7 +98,7 @@ public class TestController {
     @ResponseBody
     public String valid(
         @Range
-        @MyGate(message = "必须数字哦",regexp = "\\d*")
+        @RegexpValidate(message = "必须数字哦",regexp = "\\d*")
         String name
     ){
         return "name";

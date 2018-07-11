@@ -8,7 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 import top.oyoung.erp.entity.User;
-import top.oyoung.erp.service.LoginUserDetailService;
+import top.oyoung.erp.service.impl.LoginUserDetailServiceImpl;
 
 import java.util.Optional;
 
@@ -21,7 +21,7 @@ import java.util.Optional;
 public class LoginAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
-    private LoginUserDetailService userService;
+    private LoginUserDetailServiceImpl userService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

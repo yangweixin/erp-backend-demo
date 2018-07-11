@@ -8,4 +8,6 @@ package top.oyoung.erp.Constants;
 public class Constants {
 
     public final static String SECURITY_ROLE_PREFIX = "ROLE_";
+
+    public final static String AUTHORIZATION_HEADER = "miaomiao ";
 }

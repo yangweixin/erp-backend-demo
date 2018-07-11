@@ -1,5 +1,6 @@
 package top.oyoung.erp.filter;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,9 @@ import java.io.IOException;
 public class LoginAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
-    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        httpServletResponse.getWriter().write("sorry, you have not authenticated yet");
+    public void commence(HttpServletRequest request, HttpServletResponse response,
+                         AuthenticationException e) throws IOException {
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.getWriter().write("sorry, you have not authenticated yet");
     }
 }
