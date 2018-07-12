@@ -1,4 +1,4 @@
-package top.oyoung.erp.Constants;
+package top.oyoung.erp.constants;
 
 /**
  * @Author: Yang Weixin
@@ -7,6 +7,9 @@ package top.oyoung.erp.Constants;
  */
 public class ErrorCode {
 
+    public final static String USER_NOT_AUTHORIZATION = "user@not-authorization";
+    public final static String USER_ACCESS_DENIED = "user@access-denied";
     public final static String USER_LOGIN_USER_NOT_FOUND = "user@login-user-not-found";
     public final static String USER_LOGIN_PASSWORD_ERROR = "user@login-password-error";
+    public final static String USER_REGISTE_VALIDCODE_ERROR = "user@registe-validcode-error";
 }

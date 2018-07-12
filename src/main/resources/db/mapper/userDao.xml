@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.oyoung.erp.dao.UserDao">
+    
+    <sql id="tableUser">demo.user</sql>
+    <sql id="tableUserRole">demo.user_role</sql>
+    <sql id="tableRole">demo.role</sql>
+    
+    <resultMap id="userMap" type="User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="nickname" property="nickname"/>
+        <result column="password" property="password"/>
+        <result column="salt" property="salt"/>
+        <result column="address" property="address"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <resultMap id="roleMap" type="Role">
+        <id column="id" property="id"/>
+        <result column="role" property="role"/>
+        <result column="description" property="description"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <resultMap id="userRoleMap" type="UserRole">
+        <id column="id" property="id"/>
+        <result column="user" property="user"/>
+        <result column="role" property="role"/>
+    </resultMap>
+
+    <insert id="insertOne" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        insert <include refid="tableUser"/>
+          (
+            username,password,salt
+            <if test="nickname != null">
+                ,nickname
+            </if>
+            <if test="address != null">
+                ,address
+            </if>
+          )
+        value (
+            #{username}, #{password}, #{salt}
+            <if test="nickname != null">
+                ,#[nickname}
+            </if>
+            <if test="address != null">
+                ,#{address}
+            </if>
+        )
+    </insert>
+
+    <insert id="addRole" parameterType="UserRole" useGeneratedKeys="true" keyProperty="id">
+        insert <include refid="tableUserRole"/>
+          (user, role) value (#{user}, #{role})
+    </insert>
+
+    <select id="listRoles" parameterType="UserRole" resultMap="roleMap">
+        select role.*
+        from <include refid="tableUserRole"/> as user
+        left join <include refid="tableRole"/> as role
+          on user.role = role.id and role.status=1
+        where user.user=#{user}
+    </select>
+</mapper>

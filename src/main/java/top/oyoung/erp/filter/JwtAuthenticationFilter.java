@@ -5,12 +5,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
-import top.oyoung.erp.Constants.Constants;
-import top.oyoung.erp.entity.User;
+import top.oyoung.erp.constants.Constants;
 import top.oyoung.erp.util.JwtUtil;
 
 import javax.annotation.Resource;

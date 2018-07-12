@@ -4,14 +4,24 @@
     context-path: /
   tomcat:
     uri-encoding: utf-8
-################# mysql基础配置 #################
+################# mysql #################
 spring:
   datasource:
     name: young-001
-    url: jdbc:mysql://localhost:3306/young
+    url: jdbc:mysql://localhost:3306/
     username: root
     password: 123456
-################# redis基础配置 #################
+    schema:
+      - "classpath:schema-init.sql"
+################# flyway #################
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    init-sqls:
+    schemas:
+      - demo
+    locations: "classpath:db/migration/mysql"
+################# redis #################
   redis:
     host: localhost
     port: 6379
@@ -22,9 +32,11 @@ spring:
         max-idle: 10
         min-idle: 1
         max-active: 10
-################# mysql基础配置 #################
+
+################# mybatis #################
 mybatis:
-  mapper-locations: classpath:top/oyoung/erp/mapper/*.xml
+  mapper-locations: classpath:db/mapper/*.xml
+  type-aliases-package: top.oyoung.erp.entity
 
 logging:
 #  path: logs/
@@ -32,6 +44,7 @@ logging:
 
 
 management.endpoints.web.exposure.include: info, health,env
+
 
 
 

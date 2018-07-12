@@ -5,11 +5,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import top.oyoung.erp.Constants.Constants;
+import org.springframework.util.CollectionUtils;
+import top.oyoung.erp.constants.Constants;
 import top.oyoung.erp.dao.UserDao;
+import top.oyoung.erp.entity.Role;
 import top.oyoung.erp.entity.User;
+import top.oyoung.erp.entity.UserRole;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author: Yang Weixin
@@ -25,9 +29,17 @@ public class LoginUserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.getByName(username);
-        if(user != null) {
-            user.addAuthorities(new SimpleGrantedAuthority(Constants.SECURITY_ROLE_PREFIX + "NOMAL"));
+        if(user == null) {
+            return null;
         }
+
+        List<Role> roles = userDao.listRoles(new UserRole(user.getId()));
+        if(CollectionUtils.isEmpty(roles)){
+            return user;
+        }
+
+        roles.forEach(role -> user.addAuthorities(new SimpleGrantedAuthority(Constants.SECURITY_ROLE_PREFIX + role.getRole())));
+
         return user;
     }
 }

@@ -1,4 +1,4 @@
-package top.oyoung.erp.Constants;
+package top.oyoung.erp.constants;
 
 /**
  * @Author: Yang Weixin

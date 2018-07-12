@@ -3,7 +3,7 @@ package top.oyoung.erp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import top.oyoung.erp.Constants.Constants;
+import top.oyoung.erp.constants.Constants;
 import top.oyoung.erp.entity.User;
 
 @Configuration

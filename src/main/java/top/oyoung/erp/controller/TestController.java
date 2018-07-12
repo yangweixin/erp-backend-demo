@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import springfox.documentation.annotations.ApiIgnore;
 import top.oyoung.erp.annotation.RegexpValidate;
 import top.oyoung.erp.dao.UserDao;
 import top.oyoung.erp.entity.User;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
  * @Author: Yang Weixin
  * @Date: 2018/3/23 13:24
  */
-@Api("test")
+@ApiIgnore
 @Controller
 @Validated
 @RequestMapping("/test")

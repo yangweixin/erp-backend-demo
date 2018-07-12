@@ -2,10 +2,13 @@ package top.oyoung.erp.service.impl;
 
 import org.springframework.stereotype.Service;
 import top.oyoung.erp.dao.UserDao;
+import top.oyoung.erp.entity.Role;
 import top.oyoung.erp.entity.User;
+import top.oyoung.erp.entity.UserRole;
 import top.oyoung.erp.service.UserService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author: Yang Weixin
@@ -26,5 +29,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Long id) {
         return userDao.getById(id);
+    }
+
+    @Override
+    public int insertUser(User user) {
+        return userDao.insertOne(user);
+    }
+
+    @Override
+    public int addRole(UserRole userRole) {
+        return userDao.addRole(userRole);
+    }
+
+    @Override
+    public List<Role> listRoles(UserRole userRole) {
+        return userDao.listRoles(userRole);
     }
 }

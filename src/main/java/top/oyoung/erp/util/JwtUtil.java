@@ -26,7 +26,7 @@ public class JwtUtil {
      * @DateTime: 2018/7/11 下午3:35
      */
     private String generateToken(Map<String, Object> claims) {
-        Date expirationDate = new Date(System.currentTimeMillis() + 2592000L * 1000);//30days
+        Date expirationDate = new Date(System.currentTimeMillis() + 86400L * 1000);//30days
         return Jwts.builder()
             .setClaims(claims)
             .setExpiration(expirationDate)

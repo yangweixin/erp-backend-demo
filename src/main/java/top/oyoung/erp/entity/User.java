@@ -19,8 +19,12 @@ public class User implements Serializable,UserDetails {
 
     private int id ;
     private String username;
+    private String nickname;
     private String password;
+    private String salt;
     private String address;
+    private int status;
+
     private List<GrantedAuthority> authorities = new ArrayList<>();
 
     public int getId() {
@@ -86,6 +90,17 @@ public class User implements Serializable,UserDetails {
         return true;
     }
 
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public void setAuthorities(List<GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
 
     @Override
     public String toString() {
@@ -93,7 +108,7 @@ public class User implements Serializable,UserDetails {
             "id=" + id +
             ", username='" + username + '\'' +
             ", address='" + address + '\'' +
-            ", password='" + password + '\'' +
+            ", authorities=" + authorities +
             '}';
     }
 }

@@ -86,7 +86,7 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
-		<!-- swagger2核心依赖 -->
+		<!-- swagger2 start -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -97,6 +97,14 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger-version}</version>
         </dependency>
+		<!-- swagger2 end -->
+
+		<!-- flyway start -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<!-- flyway end -->
     </dependencies>
 
 	<build>
